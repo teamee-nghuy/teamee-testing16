@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Test with edge" verbose="1" parallel="false">
+    <test name="test edge">
+        <parameter name="browser" value="chrome"></parameter>
+        <parameter name="device" value="iPhone 14 Pro Max"></parameter>
+
+        <classes>
+            <class name="tests.LoginTest">
+                <methods>
+                    <include name="testLoginSuccess" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
