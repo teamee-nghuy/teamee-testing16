@@ -69,7 +69,7 @@ jobs:
         id: test-summary
         run:
           # Code theo sh linux
-          FILE="target/surefire-report/testng-results.xml
+          FILE="target/surefire-report/testng-results.xml"
           # $(...) chạy lệnh bên trong () và save vào biến
           # VD: TOTAL=$(lệnh)
           TOTAL=$(grep -o 'total="[0-9]*"' "$FILE | grep -o '[0-9]*')
@@ -78,12 +78,12 @@ jobs:
 
           # GITHUB_OUTPUT: có sẵn của github
           echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
-          echo "passed=PASSED" >> "$GITHUB_OUTPUT"
-          echo "failed=FAILED" >> "$GITHUB_OUTPUT"
+          echo "passed=$PASSED" >> "$GITHUB_OUTPUT"
+          echo "failed=$FAILED" >> "$GITHUB_OUTPUT"
           {
             echo "message<<MSG_EOF"
             echo "Result: ${{ job.status }} - testing16-selenium-pom"
-            echo "Total: $TOTAL | Passed: PASSED | Failed: $FAILED"
+            echo "Total: $TOTAL | Passed: $PASSED | Failed: $FAILED"
             echo "Detail: ${{ github.server_url }}/${{ github.reposotory }}/action/runs/${{ github.run_id }}"
             echo "MSG_EOF"
           } >> "$GITHUB_OUTPUT"
