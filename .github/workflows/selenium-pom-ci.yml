@@ -1,0 +1,53 @@
+# Flow
+#1. Các case chạy trigger:
+#  - push code trực tiếp trên branch chỉ định
+#  - tạo PR vào branch chỉ định
+#2. pull src mới nhất
+#3. install java trên máy ảo (cùng version jdk ở file pom)
+#+ Save các cài đặt thư viện vào cache
+#4. Cài browser (chrome)
+#5. Run test (mvn test -Dheadless=true)
+
+#Một số bước nâng cao (allure report + gửi về slack
+#6. Tạo allure report
+#7. tạo file allure-report.zip để download về chạy và xem
+#8. lấy số liệu report -> testng-result.xml
+#9. send report về slack
+
+name: Selenium POM CI
+
+#B1: trigger run workflow
+on:
+  push:
+    branches:
+      - main
+#    paths: (folder neu co nhieu project trong repo, trigger cho chi run khi thay doi o folder nay)
+#      - "sample"
+  pull_request:
+    branches:
+      - main
+# Auto cd vao folder can chay
+#defaults:
+#  run:
+#    working-directory: sample
+jobs:
+  selenium-jobs:
+    runs-on: ubuntu-latest
+    steps:
+#      - uses: có sẵn cuủa git
+#        run thì là dùng run
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'maven'
+
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Run Selenium Test
+        run: mvn -B test -Dheadless=true -Djava.awt.headless=true
