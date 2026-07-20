@@ -18,6 +18,9 @@ public class DriverFactory {
             browser = "chrome";
         }
 
+        // Handle them cho CI
+        boolean isHeadless = ConfigReader.getBoolean("headless");
+
         switch (browser){
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
@@ -36,11 +39,22 @@ public class DriverFactory {
                 WebDriverManager.chromedriver().setup();
 
                 ChromeOptions chromeOptions = new ChromeOptions();
+
+                if (isHeadless) {
+                    chromeOptions.addArguments(
+                            "--headless=true",
+                            "--disable-gpu",
+                            "--no-sandbox",
+                            "--window-size=1920,1080",
+                            "--disable-dev-shm-usage"
+                    );
+                }
+
                 if(deviceName != null && !deviceName.isEmpty()) {
                     Map<String, String> mobileEmulation = new HashMap<>();
                     mobileEmulation.put("deviceName", deviceName.trim());
                     chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
-                } else {
+                } else if(!isHeadless) {
                     chromeOptions.addArguments("--start-maximized");
                 }
 
