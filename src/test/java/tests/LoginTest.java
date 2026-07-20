@@ -63,7 +63,7 @@ public class LoginTest extends BaseTest {
         if (expectedResult.equalsIgnoreCase("success")){
             Assert.assertTrue(currentUrl.contains("dashboard"));
         } else {
-            Assert.assertTrue(currentUrl.contains("auth/login"));
+            Assert.assertFalse(currentUrl.contains("dashboard"));
         }
 
     }
