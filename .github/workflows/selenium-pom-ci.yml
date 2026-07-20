@@ -58,7 +58,7 @@ jobs:
 
       - name: Upload Allure Report
         if: always()
-        uses: action/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: allure-report
           path: target/site/allure-maven-plugin #folder lưu report
