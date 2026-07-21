@@ -69,9 +69,9 @@ jobs:
         id: test-summary
         run: |
           FILE="target/surefire-report/testng-results.xml"
-          TOTAL=$(grep -o 'total="[0-9]*"' "$FILE | grep -o '[0-9]*')
-          PASSED=$(grep -o 'passed="[0-9]*"' "$FILE | grep -o '[0-9]*')
-          FAILED=$(grep -o 'failed="[0-9]*"' "$FILE | grep -o '[0-9]*')
+          TOTAL=$(grep -o 'total="[0-9]*"' "$FILE" | grep -o '[0-9]*')
+          PASSED=$(grep -o 'passed="[0-9]*"' "$FILE" | grep -o '[0-9]*')
+          FAILED=$(grep -o 'failed="[0-9]*"' "$FILE" | grep -o '[0-9]*')
 
           echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
           echo "passed=$PASSED" >> "$GITHUB_OUTPUT"
