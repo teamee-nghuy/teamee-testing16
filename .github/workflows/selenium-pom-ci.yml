@@ -68,7 +68,7 @@ jobs:
         if: always()
         id: test-summary
         run: |
-          # Code theo sh linux
+#           Code theo sh linux
           FILE="target/surefire-report/testng-results.xml"
           # $(...) chạy lệnh bên trong () và save vào biến
           # VD: TOTAL=$(lệnh)
