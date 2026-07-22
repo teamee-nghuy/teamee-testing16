@@ -68,7 +68,7 @@ jobs:
         if: always()
         id: test-summary
         run: |
-          FILE="target/surefire-report/testng-results.xml"
+          FILE="target/surefire-reports/testng-results.xml"
           TOTAL=$(grep -o 'total="[0-9]*"' "$FILE" | grep -o '[0-9]*')
           PASSED=$(grep -o 'passed="[0-9]*"' "$FILE" | grep -o '[0-9]*')
           FAILED=$(grep -o 'failed="[0-9]*"' "$FILE" | grep -o '[0-9]*')
